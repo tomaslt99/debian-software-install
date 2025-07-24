@@ -1,0 +1,59 @@
+---
+- name: Configure Debian 12 system
+  hosts: localhost
+  become: true
+
+  tasks:
+
+    - name: Remove KDE Wallet
+      apt:
+        name: kwalletmanager
+        state: absent
+
+    - name: Add Brave browser repository and key
+      apt_key:
+        url: https://brave-browser-apt-release.s3.brave.com/brave-core.asc
+        state: present
+      register: brave_key
+
+    - name: Add Brave repository
+      apt_repository:
+        repo: 'deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main'
+        state: present
+        update_cache: yes
+
+    - name: Add Vivaldi repository and key
+      apt_key:
+        url: https://repo.vivaldi.com/stable/linux_signing_key.pub
+        state: present
+
+    - name: Add Vivaldi repository
+      apt_repository:
+        repo: 'deb [arch=amd64] https://repo.vivaldi.com/stable/deb/ stable main'
+        state: present
+        update_cache: yes
+
+    - name: Add LibreWolf repository and key
+      apt_key:
+        url: https://deb.librewolf.net/keyring.gpg
+        state: present
+
+    - name: Add LibreWolf repository
+      apt_repository:
+        repo: 'deb [arch=amd64 signed-by=/etc/apt/keyrings/librewolf.gpg] https://deb.librewolf.net bullseye main'
+        filename: librewolf
+        state: present
+        update_cache: yes
+
+    - name: Install required packages
+      apt:
+        name:
+          - codium
+          - vscodium
+          - brave-browser
+          - firefox-esr
+          - librewolf
+          - vivaldi-stable
+          - virt-manager
+        state: present
+        update_cache: yes 
