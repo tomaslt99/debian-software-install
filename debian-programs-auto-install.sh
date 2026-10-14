@@ -36,8 +36,8 @@ sudo apt-get install telegram-desktop -y
 
 # RustDesk
 sudo apt install -y wget xvfb libgtk-3-0 libnotify4 libglib2.0-0 libnss3 libxss1 libasound2
-wget https://github.com/rustdesk/rustdesk/releases/download/1.4.7/rustdesk-1.4.7-x86_64.deb
-sudo dpkg -i rustdesk-1.4.7-x86_64.deb
+wget https://github.com/rustdesk/rustdesk/releases/download/1.5.0/rustdesk-1.5.0-x86_64.deb
+sudo dpkg -i rustdesk-1.5.0-x86_64.deb
 sudo apt install -f  # Fix missing dependencies
 # at this time only this way can install Rustdesk so after installling RustDesk Upgrade package list
 
@@ -49,8 +49,6 @@ sudo apt update && sudo apt install codium
 
 
 #---
-#Setting up Network Time Protocol (NTP) on Debian 12
-
 # Install chrony, instead of ntp
 sudo apt update
 sudo apt install chrony
